@@ -2,8 +2,8 @@ package co.com.ias.ejercicioCA.application.configuration;
 
 import co.com.ias.ejercicioCA.domain.model.gateways.IStudentRepository;
 import co.com.ias.ejercicioCA.domain.model.gateways.ISubjectRepository;
-import co.com.ias.ejercicioCA.domain.usercase.StudentUseCase;
-import co.com.ias.ejercicioCA.domain.usercase.SubjectUseCase;
+import co.com.ias.ejercicioCA.domain.usecase.StudentUseCase;
+import co.com.ias.ejercicioCA.domain.usecase.SubjectUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

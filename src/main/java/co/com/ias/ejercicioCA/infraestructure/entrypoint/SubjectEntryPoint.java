@@ -1,7 +1,7 @@
 package co.com.ias.ejercicioCA.infraestructure.entrypoint;
 
 import co.com.ias.ejercicioCA.domain.model.subject.dto.SubjectDTO;
-import co.com.ias.ejercicioCA.domain.usercase.SubjectUseCase;
+import co.com.ias.ejercicioCA.domain.usecase.SubjectUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +52,14 @@ public class SubjectEntryPoint {
             return new ResponseEntity<>(String.format("Se ha eliminado correctamente el estudiante con ID %d",id),HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(String.format("El estudiante con ID %d no se encuentra en la base de datos por ende no puede ser eliminado",id),HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> subjectById(@PathVariable Long id){
+        try{
+            return new ResponseEntity<>(subjectUseCase.getStudentById(id),HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>("No es posible encontrar un estudiante con el id suministrado",HttpStatus.BAD_REQUEST);
         }
     }
 }

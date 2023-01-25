@@ -18,4 +18,6 @@ public interface IStudentRepository {
     public boolean deleteStudent(Long id);
     //Find students by subejct id
     public List<Student> getStudentsBySubjectId(Long id);
+    //Find student by id
+    public Student getStudentById(Long id);
 }

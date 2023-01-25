@@ -6,6 +6,8 @@ import co.com.ias.ejercicioCA.domain.model.subject.SubjectName;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Optional;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -36,4 +38,8 @@ public class SubjectDBO {
                 subject.getName().getValue());
     }
 
+    public static Subject toDomain(Optional<SubjectDBO> subjectDBO) {
+        return new Subject(new SubjectId(subjectDBO.get().getId()),
+                new SubjectName(subjectDBO.get().getName()));
+    }
 }

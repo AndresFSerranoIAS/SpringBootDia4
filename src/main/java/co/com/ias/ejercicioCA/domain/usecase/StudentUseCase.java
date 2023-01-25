@@ -1,4 +1,4 @@
-package co.com.ias.ejercicioCA.domain.usercase;
+package co.com.ias.ejercicioCA.domain.usecase;
 
 import co.com.ias.ejercicioCA.domain.model.gateways.IStudentRepository;
 import co.com.ias.ejercicioCA.domain.model.student.Student;
@@ -37,5 +37,8 @@ public class StudentUseCase {
         return list.stream()
                 .map(StudentDTO::fromDomain)
                 .collect(Collectors.toList());
+    }
+    public StudentDTO getStudentById(Long id){
+        return StudentDTO.fromDomain(studentRepository.getStudentById(id));
     }
 }

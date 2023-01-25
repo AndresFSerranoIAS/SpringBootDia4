@@ -14,4 +14,6 @@ public interface ISubjectRepository {
     public Subject updateSubject(Subject subject, Long id);
     //Delete
     public boolean deleteSubject(Long id);
+    // Find subject by id
+    public Subject getStudentById(Long id);
 }

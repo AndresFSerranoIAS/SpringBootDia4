@@ -75,4 +75,13 @@ public class StudentAdapterRepository implements IStudentRepository {
         }
         return null;
     }
+
+    @Override
+    public Student getStudentById(Long id) {
+        Optional<StudentDBO> studentFound = studentRepositoryAdapater.findById(id);
+        if(studentFound.isPresent()){
+            return StudentDBO.toDomain(studentFound);
+        }
+        return null;
+    }
 }

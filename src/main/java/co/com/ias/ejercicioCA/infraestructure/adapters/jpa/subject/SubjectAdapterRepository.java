@@ -53,4 +53,13 @@ public class SubjectAdapterRepository implements ISubjectRepository {
         }
         return false;
     }
+
+    @Override
+    public Subject getStudentById(Long id) {
+        Optional<SubjectDBO> subjectFound = subjectRepositoryAdapter.findById(id);
+        if(subjectFound.isPresent()){
+            return SubjectDBO.toDomain(subjectFound);
+        }
+        return null;
+    }
 }

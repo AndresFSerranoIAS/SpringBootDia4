@@ -1,6 +1,7 @@
-package co.com.ias.ejercicioCA.domain.usercase;
+package co.com.ias.ejercicioCA.domain.usecase;
 
 import co.com.ias.ejercicioCA.domain.model.gateways.ISubjectRepository;
+import co.com.ias.ejercicioCA.domain.model.student.dto.StudentDTO;
 import co.com.ias.ejercicioCA.domain.model.subject.Subject;
 import co.com.ias.ejercicioCA.domain.model.subject.dto.SubjectDTO;
 
@@ -30,5 +31,9 @@ public class SubjectUseCase {
     }
     public boolean deleteSubject(Long id) {
         return subjectRepository.deleteSubject(id);
+    }
+
+    public SubjectDTO getStudentById(Long id){
+        return SubjectDTO.fromDomain(subjectRepository.getStudentById(id));
     }
 }

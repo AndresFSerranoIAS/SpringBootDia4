@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Optional;
+
 @Entity
 @Table(name = "students")
 @Setter
 @Getter
-
 public class StudentDBO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +55,12 @@ public class StudentDBO {
                 student.getName().getValue(),
                 student.getPhone().getValue(),
                 student.getEmail().getValue(),student.getIdSuject().getValue());
+    }
+
+    public static Student toDomain(Optional<StudentDBO> studentDBO) {
+        return new Student(new StudentId(studentDBO.get().getId()),
+                new StudentName(studentDBO.get().getName()),
+                new StudentPhone(studentDBO.get().getPhone()),
+                new StudentEmail(studentDBO.get().getName()), new StudentIdSubject(studentDBO.get().getSubjectDBO().getId()));
     }
 }
