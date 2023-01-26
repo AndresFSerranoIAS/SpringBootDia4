@@ -58,6 +58,6 @@ public class SubjectAdapterRepository implements ISubjectRepository {
         if(subjectFound.isPresent()){
             return SubjectDBO.toDomain(subjectFound);
         }
-        return null;
+        return SubjectDBO.toDomain(new SubjectDBO(null,null));
     }
 }
