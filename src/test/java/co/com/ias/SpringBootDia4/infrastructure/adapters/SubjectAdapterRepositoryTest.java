@@ -4,6 +4,7 @@ import co.com.ias.SpringBootDia4.domain.model.subject.Subject;
 import co.com.ias.SpringBootDia4.domain.model.subject.SubjectId;
 import co.com.ias.SpringBootDia4.domain.model.subject.SubjectName;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.entity.SubjectDBO;
+import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.exceptions.SubjectNotFoundException;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.subject.ISubjectRepositoryAdapter;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.subject.SubjectAdapterRepository;
 import org.junit.jupiter.api.*;
@@ -21,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test")
 public class SubjectAdapterRepositoryTest {
     @InjectMocks
@@ -34,7 +34,6 @@ public class SubjectAdapterRepositoryTest {
     }
 
     @Test
-    @Order(1)
     @DisplayName("Test 1 - Save Subject")
     void saveSubject(){
         //Arange
@@ -45,9 +44,8 @@ public class SubjectAdapterRepositoryTest {
         Assertions.assertEquals("Ecuaciones",res.getName().getValue());
     }
     @Test
-    @Order(2)
     @DisplayName("Test 2 - Update Subject")
-    void updateSubject(){
+    void updateSubject() throws SubjectNotFoundException {
         //Arrange
         Subject subjectX = new Subject(new SubjectId(1L),new SubjectName("Ecuaciones"));
         subjectX = subjectAdapterRepository.saveSubject(subjectX);
@@ -58,9 +56,8 @@ public class SubjectAdapterRepositoryTest {
         Assertions.assertEquals("Álgebra",res.getName().getValue());
     }
 
-    //Pregunta prueba unitaria??
+    //¿Pregunta prueba unitaria??
     @Test
-    @Order(3)
     @DisplayName("Test 3- Delete Subject")
     void deleteSubject(){
         //Arrange
@@ -75,7 +72,6 @@ public class SubjectAdapterRepositoryTest {
         Assertions.assertNull(subjectDBO.getId().getValue());
     }
     @Test
-    @Order(4)
     @DisplayName("Test 4 - Get Subjects")
     void getSubjects(){
         //Arrange
@@ -104,8 +100,6 @@ public class SubjectAdapterRepositoryTest {
         Assertions.assertEquals(subjectIds, subjectIdsFound);
         Assertions.assertEquals(subjectNames, subjectNamesFound);
 
-        //Assertions.assertTrue(subjects.stream().allMatch(s -> s.getId().getValue().equals(subject2.getId().getValue()) && s.getName().getValue().equals(subject2.getName().getValue())));
-        //Assertions.assertTrue(subjects.stream().allMatch(s -> s.getId().getValue().equals(subject3.getId().getValue()) && s.getName().getValue().equals(subject3.getName().getValue())));
     }
 
 }

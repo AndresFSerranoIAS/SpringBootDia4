@@ -4,9 +4,6 @@ package co.com.ias.SpringBootDia4.domain.model.subject.dto;
 import co.com.ias.SpringBootDia4.domain.model.subject.Subject;
 import co.com.ias.SpringBootDia4.domain.model.subject.SubjectId;
 import co.com.ias.SpringBootDia4.domain.model.subject.SubjectName;
-import co.com.ias.SpringBootDia4.infraestructure.entrypoint.exceptions.StringDataFailedFormatException;
-
-import java.util.regex.Pattern;
 
 public class SubjectDTO {
 

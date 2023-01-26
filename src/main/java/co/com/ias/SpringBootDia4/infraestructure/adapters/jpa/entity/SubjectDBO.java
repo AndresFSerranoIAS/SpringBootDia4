@@ -42,4 +42,9 @@ public class SubjectDBO {
         return new Subject(new SubjectId(subjectDBO.get().getId()),
                 new SubjectName(subjectDBO.get().getName()));
     }
+
+    public static SubjectDBO fromDomain(Optional<SubjectDBO> subjectDBO) {
+        return new SubjectDBO(subjectDBO.get().getId(),
+                subjectDBO.get().getName());
+    }
 }

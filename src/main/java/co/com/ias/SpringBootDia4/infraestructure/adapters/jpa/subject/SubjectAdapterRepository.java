@@ -3,6 +3,7 @@ package co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.subject;
 import co.com.ias.SpringBootDia4.domain.model.gateways.ISubjectRepository;
 import co.com.ias.SpringBootDia4.domain.model.subject.Subject;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.entity.SubjectDBO;
+import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.exceptions.SubjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,6 @@ public class SubjectAdapterRepository implements ISubjectRepository {
     public Subject saveSubject(Subject subject) {
         return SubjectDBO.toDomain(subjectRepositoryAdapter.save(SubjectDBO.fromDomain(subject)));
     }
-
     @Override
     public List<Subject> getSubjects() {
         List<SubjectDBO> list = subjectRepositoryAdapter.findAll();
@@ -29,19 +29,15 @@ public class SubjectAdapterRepository implements ISubjectRepository {
                 .map(SubjectDBO::toDomain)
                 .collect(Collectors.toList());
     }
-
     @Override
-    public Subject updateSubject(Subject subject, Long id) {
+    public Subject updateSubject(Subject subject, Long id) throws SubjectNotFoundException {
         Optional<SubjectDBO> subjectChange = subjectRepositoryAdapter.findById(id);
         if(subjectChange.isPresent()){
             subjectChange.get().setName(subject.getName().getValue());
-            return SubjectDBO.toDomain(subjectRepositoryAdapter.save(SubjectDBO.fromDomain(subject)));
-        }else{
-            return null;
+            return SubjectDBO.toDomain(subjectRepositoryAdapter.save(SubjectDBO.fromDomain(subjectChange)));
         }
+            throw new SubjectNotFoundException("No se ha encontrado la materia que desea actualizar");
     }
-
-
     @Override
     public boolean deleteSubject(Long id) {
         Optional<SubjectDBO> subjectErase = subjectRepositoryAdapter.findById(id);
@@ -58,6 +54,6 @@ public class SubjectAdapterRepository implements ISubjectRepository {
         if(subjectFound.isPresent()){
             return SubjectDBO.toDomain(subjectFound);
         }
-        return SubjectDBO.toDomain(new SubjectDBO(null,null));
+        throw new SubjectNotFoundException("No se ha encontrado la materia en la base de datos");
     }
 }

@@ -19,14 +19,12 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SubjectUseCaseTest {
     @InjectMocks
     private SubjectUseCase subjectUseCase;
     @Mock
     private ISubjectRepository iSubjectRepository;
     @Test
-    @Order(1)
     @DisplayName("Test 1 - Save Subject")
     void saveSubject() throws Exception {
         //Arange
@@ -39,7 +37,6 @@ public class SubjectUseCaseTest {
         assertEquals(subjectActual.getName(),"Ecuaciones");
     }
     @Test
-    @Order(2)
     @DisplayName("Test 2 - Update Subject")
     void updateSubject() throws Exception {
         //Arange
@@ -52,7 +49,6 @@ public class SubjectUseCaseTest {
         assertEquals(subjectActual.getName(),"Ecuaciones");
     }
     @Test
-    @Order(3)
     @DisplayName("Test 3 - Delete Subject")
     void deleteSubject() throws Exception {
         //Arange
@@ -63,7 +59,6 @@ public class SubjectUseCaseTest {
         assertTrue(response);
     }
     @Test
-    @Order(4)
     @DisplayName("Test 4 - Get Subjects")
     void getSubjects() throws Exception {
         //Arange
@@ -74,7 +69,6 @@ public class SubjectUseCaseTest {
         assertEquals(response,new ArrayList<>());
     }
     @Test
-    @Order(5)
     @DisplayName("Test 5 - Get One Subject")
     void getSubjectById() throws Exception {
         //Arange

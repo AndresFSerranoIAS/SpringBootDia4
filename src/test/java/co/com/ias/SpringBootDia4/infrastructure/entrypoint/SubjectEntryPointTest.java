@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.http.RequestEntity.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 @WebMvcTest(SubjectEntryPoint.class)
 public class SubjectEntryPointTest {
 
@@ -34,7 +34,6 @@ public class SubjectEntryPointTest {
     private MockMvc mockMvc;
 
     @Test
-    @Order(1)
     @DisplayName("Test 1 (Post) - Save subject good case")
     void saveSubject1() throws Exception {
     //Arrange
@@ -53,7 +52,7 @@ public class SubjectEntryPointTest {
 
     }
     @Test
-    @Order(2)
+
     @DisplayName("Test 2 (Post) - Save subject number in input name")
     void saveSubject2() throws Exception{
         //Arrange
@@ -71,7 +70,6 @@ public class SubjectEntryPointTest {
                                 containsString("Por favor sólo suministre letras del abecedario en el nombre de la materia")));
     }
     @Test
-    @Order(3)
     @DisplayName("Test 3 (Post) - Save subject a special character like @ in subject name")
     void saveSubject3() throws Exception{
         //Arrange
@@ -89,7 +87,6 @@ public class SubjectEntryPointTest {
                                 containsString("Por favor sólo suministre letras del abecedario en el nombre de la materia")));
     }
     @Test
-    @Order(4)
     @DisplayName("Test 4 (Post) - Save subject without input in name")
     void saveSubject4() throws Exception{
         //Arrange
@@ -107,7 +104,6 @@ public class SubjectEntryPointTest {
                                 containsString("Por favor ingrese el nombre de la materia")));
     }
     @Test
-    @Order(5)
     @DisplayName("Test 5 (Get) - Get subjects list")
     void getSubjects() throws Exception{
         mockMvc.perform(get("/subject/")
@@ -119,7 +115,6 @@ public class SubjectEntryPointTest {
                                 containsString("[]")));
     }
     @Test
-    @Order(6)
     @DisplayName("Test 6 (Put) - Change subject name")
     void updateSubject1() throws Exception{
         //Arrange
@@ -139,7 +134,6 @@ public class SubjectEntryPointTest {
 
     }
     @Test
-    @Order(7)
     @DisplayName("Test 7 (Put) - Change subject name with blank new name")
     void updateSubject2() throws Exception{
         //Arrange
@@ -159,7 +153,6 @@ public class SubjectEntryPointTest {
 
     }
     @Test
-    @Order(8)
     @DisplayName("Test 8 (Delete) - Delete an existent Subject")
     void deleteSubject1() throws Exception{
         //Arrange
@@ -177,7 +170,6 @@ public class SubjectEntryPointTest {
 
     }
     @Test
-    @Order(9)
     @DisplayName("Test 9 (Delete) - Delete a not existent Subject")
     void deleteSubject2() throws Exception{
         //Arrange
@@ -194,7 +186,6 @@ public class SubjectEntryPointTest {
                                 .containsString("El estudiante con ID 1 no se encuentra en la base de datos por ende no puede ser eliminado")));
     }
     @Test
-    @Order(10)
     @DisplayName("Test 10 (Get) - Get one existent subject")
     void getOneSubject1() throws Exception{
         SubjectDTO subjectFound = new SubjectDTO(1L,"Ecuaciones");
@@ -209,7 +200,6 @@ public class SubjectEntryPointTest {
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("{\"id\":1,\"name\":\"Ecuaciones\"}")));
     }
     @Test
-    @Order(11)
     @DisplayName("Test 11 (Get) - Get one non existent subject")
     void getOneSubject2() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
@@ -219,6 +209,4 @@ public class SubjectEntryPointTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isInternalServerError());
     }
-
-
 }
