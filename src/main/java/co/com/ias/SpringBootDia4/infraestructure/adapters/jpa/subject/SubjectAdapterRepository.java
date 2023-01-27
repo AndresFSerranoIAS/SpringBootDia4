@@ -5,6 +5,7 @@ import co.com.ias.SpringBootDia4.domain.model.subject.Subject;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.entity.SubjectDBO;
 import co.com.ias.SpringBootDia4.infraestructure.adapters.jpa.exceptions.SubjectNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class SubjectAdapterRepository implements ISubjectRepository {
     }
 
     @Override
-    public Subject getStudentById(Long id) {
+    public Subject getSubjectById(Long id) throws SubjectNotFoundException{
         Optional<SubjectDBO> subjectFound = subjectRepositoryAdapter.findById(id);
         if(subjectFound.isPresent()){
             return SubjectDBO.toDomain(subjectFound);

@@ -33,7 +33,7 @@ public class SubjectUseCase {
         return subjectRepository.deleteSubject(id);
     }
 
-    public SubjectDTO getStudentById(Long id){
-        return SubjectDTO.fromDomain(subjectRepository.getStudentById(id));
+    public SubjectDTO getSubjectById(Long id){
+        return SubjectDTO.fromDomain(subjectRepository.getSubjectById(id));
     }
 }

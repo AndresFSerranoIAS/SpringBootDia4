@@ -15,6 +15,10 @@ public class SubjectDTO {
         this.name = name;
     }
 
+    public SubjectDTO() {
+
+    }
+
     public Long getId() {
         return id;
     }

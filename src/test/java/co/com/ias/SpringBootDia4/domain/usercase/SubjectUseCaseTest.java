@@ -74,9 +74,9 @@ public class SubjectUseCaseTest {
         //Arange
         SubjectDTO subjectDTO = new SubjectDTO(1L,"Ecuaciones");
         Subject subject = SubjectDTO.toDomain(subjectDTO);
-        when(iSubjectRepository.getStudentById(1L)).thenReturn(subject);
+        when(iSubjectRepository.getSubjectById(1L)).thenReturn(subject);
         //Act && Assert
-        SubjectDTO subjectActual = subjectUseCase.getStudentById(1L) ;
+        SubjectDTO subjectActual = subjectUseCase.getSubjectById(1L) ;
         Assertions.assertNotNull(subjectActual);
         assertEquals(subjectActual.getName(),"Ecuaciones");
     }

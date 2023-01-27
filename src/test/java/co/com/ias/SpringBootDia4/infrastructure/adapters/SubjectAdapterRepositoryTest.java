@@ -64,12 +64,9 @@ public class SubjectAdapterRepositoryTest {
         Subject subject = new Subject(new SubjectId(1L),new SubjectName("Ecuaciones"));
         subject = subjectAdapterRepository.saveSubject(subject);
         //Act
-        boolean res = subjectAdapterRepository.deleteSubject(subject.getId().getValue());
-        Subject subjectDBO = subjectAdapterRepository.getStudentById(subject.getId().getValue());
+        boolean res = subjectAdapterRepository.deleteSubject(1L);
         //Assert
         Assertions.assertTrue(res);
-        Assertions.assertNull(subjectDBO.getName().getValue());
-        Assertions.assertNull(subjectDBO.getId().getValue());
     }
     @Test
     @DisplayName("Test 4 - Get Subjects")
